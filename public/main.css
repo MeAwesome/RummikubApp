@@ -25,4 +25,6 @@ canvas{
 input{
 	position:absolute;
 	z-index: 1;
+	top:250px;
+	left:20%;
 }
