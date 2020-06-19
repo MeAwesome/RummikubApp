@@ -137,7 +137,7 @@ function joinScreen(){
 
 function lobbyScreen(){
   game.fill(Color.grey);
-  game.text(currentRoom, 360, 125, Color.white, 90, "Barlow", "centered");
+  game.text(currentRoom, 360, 125, Color.red, 100, "Barlow", "centered");
   for(var player = 0; player < currentRoomData.players.length; player++){
     game.text(currentRoomData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
   }
