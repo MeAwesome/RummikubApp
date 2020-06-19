@@ -44,8 +44,8 @@ function setup(){
   room3_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   room4_btn.setData("room4", 420, 700, 200, 100, Color.white);
   room4_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
-  start_btn.setData("start", 420, 700, 100, 50, Color.green);
-  start_btn.setLabel("START", 60, "Barlow", Color.black, "centered");
+  start_btn.setData("start", 285, 700, 150, 100, Color.green);
+  start_btn.setLabel("START", 70, "Barlow", Color.black, "centered");
   tickCount = 0;
   showingScreen = "main menu";
   open_rooms = [];
