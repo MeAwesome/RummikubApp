@@ -47,6 +47,8 @@ function setup(){
   showingScreen = "main menu";
   open_rooms = [];
   currentPage = 0;
+  currentRoom = undefined;
+  currentRoomData = undefined;
   runner();
 }
 
@@ -57,6 +59,9 @@ function runner(){
       break;
     case "join menu":
       joinScreen();
+      break;
+    case "lobby menu":
+      lobbyScreen();
       break;
     default:
       menuScreen();
@@ -85,7 +90,7 @@ function menuScreen(){
   if(create_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    showingScreen = "create menu";
+    socket.emit("create_room");
   }
   if(settings_btn.pressed()){
     click_wav.stop();
@@ -127,21 +132,33 @@ function joinScreen(){
   }
 }
 
+function lobbyScreen(){
+  game.fill(Color.grey);
+  game.text(currentRoom, 360, 125, Color.white, 90, "Barlow", "centered");
+  for(var player = 0; player < currentRoomData.players.length; player++){
+    game.text(currentRoomData.players[player], 360, 250 + (250 * player), Color.white, 50, "Barlow", "centered");
+  }
+  home_btn.draw();
+  if(home_btn.pressed()){
+    click_wav.stop();
+    click_wav.play();
+    showingScreen = "main menu";
+  }
+}
+
 function bindSocketEvents(){
   socket.on("connected_to_server", () => {
     setup();
   });
 
-  socket.on("joined_room", () => {
-    alert("you joined the room");
+  socket.on("joined_room", (data) => {
+    currentRoom = data.code;
+    currentRoomData = data;
+    showingScreen = "lobby menu";
   });
 
   socket.on("left_room", () => {
     color = Color.red;
-  });
-
-  socket.on("room_code", (code) => {
-    console.log(code);
   });
 
   socket.on("found_rooms", (rooms) => {

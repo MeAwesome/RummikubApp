@@ -36,7 +36,6 @@ io.on("connection", function(socket){
 			var r = new Room();
 			rooms[r.getCode()] = r;
 			connections[socket.id].joinRoom(r.getCode());
-			socket.emit("room_code", r.getCode());
 		}
 	});
 
@@ -96,7 +95,7 @@ function Room(){
 	this.addPlayer = function(id){
 		this.metadata.players.push(id);
 		connections[id].room = this.metadata.code;
-		connections[id].socket.emit("joined_room");
+		connections[id].socket.emit("joined_room", this.getRoomMetadata());
 	}
 
 	this.removePlayer = function(id){
