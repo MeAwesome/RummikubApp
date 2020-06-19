@@ -3,7 +3,7 @@ function onLoad(){
   game = new Paint("game");
   gameDisplay = new Paint("gameDisplay");
   logos = new Album();
-  logos.addPhotos("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
+  logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
   socket = io();
   bindSocketEvents();
 }
