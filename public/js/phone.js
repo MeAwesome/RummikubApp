@@ -7,6 +7,7 @@ function onLoad(){
   create_btn = new Controller("rectangle-button", game);
   profile_btn = new Controller("circle-button", game);
   settings_btn = new Controller("circle-button", game);
+  home_btn = new Controller("image-button", game);
   room1_btn = new Controller("rectangle-button", game);
   room2_btn = new Controller("rectangle-button", game);
   room3_btn = new Controller("rectangle-button", game);
@@ -33,8 +34,9 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
+  home_btn.setData("home", logos.photo("Rummikub-Joker"), 285, 1000, 150, 150);
   room1_btn.setData("room1", 100, 400, 200, 100, Color.white);
-  room1_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
+  room1_btn.setLabel("ABCD", 80, "Barlow", Color.black, "centered");
   room2_btn.setData("room2", 420, 400, 200, 100, Color.white);
   room2_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   room3_btn.setData("room3", 100, 700, 200, 100, Color.white);
@@ -103,9 +105,15 @@ function joinScreen(){
   room2_btn.draw();
   room3_btn.draw();
   room4_btn.draw();
+  home_btn.draw();
   //for(var room = 0; room < open_rooms.length; room++){
     //game.
   //}
+  if(home_btn.pressed()){
+    click_wav.stop();
+    click_wav.play();
+    showingScreen = "main menu";
+  }
 }
 
 function bindSocketEvents(){
