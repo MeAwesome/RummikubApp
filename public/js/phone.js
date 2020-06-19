@@ -61,7 +61,19 @@ function menuScreen(){
   game.image(icons.photo("Profile"), 450, 1050, 200, 200);
   if(join_btn.pressed()){
     click_wav.play();
-    showingScreen = "join";
+    showingScreen = "join menu";
+  }
+  if(create_btn.pressed()){
+    click_wav.play();
+    showingScreen = "create menu";
+  }
+  if(settings_btn.pressed()){
+    click_wav.play();
+    showingScreen = "settings menu";
+  }
+  if(profile_btn.pressed()){
+    click_wav.play();
+    showingScreen = "profile menu";
   }
 }
 
