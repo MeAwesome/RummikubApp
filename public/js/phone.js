@@ -118,7 +118,7 @@ function joinScreen(){
   if(room1_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    showingScreen = "main menu";
+    socket.emit("join_room", room1_btn.label);
   }
   if(home_btn.pressed()){
     click_wav.stop();
@@ -133,7 +133,7 @@ function bindSocketEvents(){
   });
 
   socket.on("joined_room", () => {
-    color = Color.green;
+    alert("you joined the room");
   });
 
   socket.on("left_room", () => {
