@@ -1,4 +1,5 @@
 function onLoad(){
+  touches = [];
   me = new Player();
   game = new Paint("game");
   gameDisplay = new Paint("gameDisplay");
