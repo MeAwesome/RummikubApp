@@ -58,6 +58,10 @@ io.on("connection", function(socket){
 		socket.emit("found_rooms", open_rooms);
 	});
 
+	socket.on("start_game", () => {
+		rooms[connections[socket.id].room].startGame();
+	});
+
 });
 
 function Connection(socket){
@@ -86,7 +90,8 @@ function Room(){
 	this.metadata = {
 		code:generateRoomCode(),
 		players:[],
-		maxPlayers:4
+		maxPlayers:4,
+		open:true
 	};
 
 	this.data = {
@@ -121,7 +126,7 @@ function Room(){
 	}
 
 	this.canJoin = function(){
-		return this.metadata.players.length <= this.metadata.maxPlayers;
+		return (this.metadata.players.length <= this.metadata.maxPlayers) && this.metadata.open;
 	}
 
 	this.getRoomMetadata = function(){
@@ -130,6 +135,10 @@ function Room(){
 
 	this.getCode = function(){
 		return this.metadata.code;
+	}
+
+	this.startGame = function(){
+		this.metadata.open = false;
 	}
 }
 

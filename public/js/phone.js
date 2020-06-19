@@ -145,6 +145,11 @@ function lobbyScreen(){
     start_btn.draw();
   }
   home_btn.draw();
+  if(start_btn.pressed()){
+    click_wav.stop();
+    click_wav.play();
+    socket.emit("start_game");
+  }
   if(home_btn.pressed()){
     click_wav.stop();
     click_wav.play();
