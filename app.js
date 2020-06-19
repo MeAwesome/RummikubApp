@@ -103,7 +103,7 @@ function Room(){
 		this.metadata.players.push(id);
 		connections[id].room = this.metadata.code;
 		connections[id].socket.emit("joined_room", this.getRoomMetadata());
-		this.sendToRoomMembers("update_room", this.getRoomMetadata(), this.getRoomData());
+		this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 	}
 
 	this.removePlayer = function(id){
@@ -114,7 +114,7 @@ function Room(){
 		}
 		connections[id].room = undefined;
 		connections[id].socket.emit("left_room");
-		this.sendToRoomMembers("update_room", this.getRoomMetadata(), this.getRoomData());
+		this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 		if(this.metadata.players.length == 0){
 			delete rooms[this.metadata.code];
 		}

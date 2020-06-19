@@ -195,9 +195,9 @@ function bindSocketEvents(){
     open_rooms = rooms;
   });
 
-  socket.on("update_room", (metadata, data) => {
-    currentRoomMetaData = metadata;
-    currentRoomData = data;
+  socket.on("update_room", (d) => {
+    currentRoomMetaData = d.metadata;
+    currentRoomData = d.data;
   });
 
   socket.on("started_game", () => {
