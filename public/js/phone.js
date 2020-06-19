@@ -13,6 +13,7 @@ function setup(){
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
   tickCount = 0;
+  color = Color.red;
   runner();
 }
 
@@ -24,7 +25,7 @@ function runner(){
 }
 
 function menuScreen(){
-  game.fill(Color.grey);
+  game.fill(color);
 }
 
 function bindSocketEvents(){
@@ -32,8 +33,8 @@ function bindSocketEvents(){
     setup();
   });
 
-  socket.on("connected_to_room", () => {
-    me.setCurrentScreen("character selection");
+  socket.on("joined_room", () => {
+    color = Color.green;
   });
 
   socket.on("disconnect", () => {
