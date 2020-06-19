@@ -158,6 +158,8 @@ function bindSocketEvents(){
   });
 
   socket.on("left_room", () => {
+    currentRoom = undefined;
+    currentRoomData = undefined;
     showingScreen = "main menu";
   });
 
