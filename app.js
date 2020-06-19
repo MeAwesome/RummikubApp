@@ -32,14 +32,20 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("create_room", () => {
-		var r = new Room();
-		rooms[r.getCode()] = r;
-		connections[socket.id].joinRoom(r.getCode());
-		socket.emit("room_code", r.getCode());
+		if(connections[socket.id].room == undefined){
+			var r = new Room();
+			rooms[r.getCode()] = r;
+			connections[socket.id].joinRoom(r.getCode());
+			socket.emit("room_code", r.getCode());
+		}
 	});
 
 	socket.on("join_room", (code) => {
 		connections[socket.id].joinRoom(code);
+	});
+
+	socket.on("leave_room", () => {
+		connections[socket.id].leaveRoom();
 	});
 
 });
