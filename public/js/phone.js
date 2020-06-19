@@ -133,22 +133,30 @@ function joinScreen(){
   if(room1_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    socket.emit("join_room", room1_btn.label);
+    if(room1_btn.label != "----"){
+      socket.emit("join_room", room1_btn.label);
+    }
   }
   if(room2_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    socket.emit("join_room", room2_btn.label);
+    if(room2_btn.label != "----"){
+      socket.emit("join_room", room2_btn.label);
+    }
   }
   if(room3_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    socket.emit("join_room", room3_btn.label);
+    if(room3_btn.label != "----"){
+      socket.emit("join_room", room3_btn.label);
+    }
   }
   if(room4_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    socket.emit("join_room", room4_btn.label);
+    if(room4_btn.label != "----"){
+      socket.emit("join_room", room4_btn.label);
+    }
   }
   if(home_btn.pressed()){
     click_wav.stop();
