@@ -48,6 +48,16 @@ io.on("connection", function(socket){
 		connections[socket.id].leaveRoom();
 	});
 
+	socket.on("find_rooms", () => {
+		var open_rooms = [];
+		for(room in rooms){
+			if(rooms[room].canJoin()){
+				open_rooms.push(room);
+			}
+		}
+		socket.emit("found_rooms", open_rooms);
+	});
+
 });
 
 function Connection(socket){

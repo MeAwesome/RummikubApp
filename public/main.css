@@ -20,14 +20,3 @@ canvas{
   overflow: hidden;
   position: absolute;
 }
-
-input{
-	position:absolute;
-	top:250px;
-	left:20%;
-	display:none;
-	font-size:42px;
-	text-align:center;
-	-webkit-appearance: none;
-	border-radius: 0;
-}

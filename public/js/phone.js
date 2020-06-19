@@ -7,6 +7,10 @@ function onLoad(){
   create_btn = new Controller("rectangle-button", game);
   profile_btn = new Controller("circle-button", game);
   settings_btn = new Controller("circle-button", game);
+  room1_btn = new Controller("rectangle-button", game);
+  room2_btn = new Controller("rectangle-button", game);
+  room3_btn = new Controller("rectangle-button", game);
+  room4_btn = new Controller("rectangle-button", game);
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
@@ -29,10 +33,17 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
-  input_box = document.getElementById("textinput");
-  input_box.style.display = "none";
+  room1_btn.setData("room1", 150, 400, 400, 200, Color.white);
+  room1_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
+  room2_btn.setData("room2", 420, 400, 400, 200, Color.white);
+  room2_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
+  room3_btn.setData("room3", 150, 700, 400, 200, Color.white);
+  room3_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
+  room4_btn.setData("room4", 420, 700, 400, 200, Color.white);
+  room4_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   tickCount = 0;
   showingScreen = "main menu";
+  open_rooms = [];
   runner();
 }
 
@@ -65,6 +76,7 @@ function menuScreen(){
   if(join_btn.pressed()){
     click_wav.stop();
     click_wav.play();
+    socket.emit("find_rooms");
     showingScreen = "join menu";
   }
   if(create_btn.pressed()){
@@ -86,8 +98,14 @@ function menuScreen(){
 
 function joinScreen(){
   game.fill(Color.grey);
-  game.text("Enter Room Code", 360, 125, Color.white, 90, "Barlow", "centered");
-  input_box.style.display = "block";
+  game.text("Select Room Code", 360, 125, Color.white, 90, "Barlow", "centered");
+  room1_btn.draw();
+  room2_btn.draw();
+  room3_btn.draw();
+  room4_btn.draw();
+  //for(var room = 0; room < open_rooms.length; room++){
+    //game.
+  //}
 }
 
 function bindSocketEvents(){
@@ -105,6 +123,10 @@ function bindSocketEvents(){
 
   socket.on("room_code", (code) => {
     console.log(code);
+  });
+
+  socket.on("found_rooms", (rooms) => {
+
   });
 
   socket.on("disconnect", () => {
