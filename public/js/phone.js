@@ -145,7 +145,7 @@ function bindSocketEvents(){
   });
 
   socket.on("found_rooms", (rooms) => {
-
+    open_rooms = rooms;
   });
 
   socket.on("disconnect", () => {
