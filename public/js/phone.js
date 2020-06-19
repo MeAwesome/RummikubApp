@@ -33,13 +33,13 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
-  room1_btn.setData("room1", 150, 400, 400, 200, Color.white);
+  room1_btn.setData("room1", 100, 400, 200, 100, Color.white);
   room1_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
-  room2_btn.setData("room2", 420, 400, 400, 200, Color.white);
+  room2_btn.setData("room2", 420, 400, 200, 100, Color.white);
   room2_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
-  room3_btn.setData("room3", 150, 700, 400, 200, Color.white);
+  room3_btn.setData("room3", 100, 700, 200, 100, Color.white);
   room3_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
-  room4_btn.setData("room4", 420, 700, 400, 200, Color.white);
+  room4_btn.setData("room4", 420, 700, 200, 100, Color.white);
   room4_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   tickCount = 0;
   showingScreen = "main menu";
