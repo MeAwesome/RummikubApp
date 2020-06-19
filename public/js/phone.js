@@ -29,6 +29,10 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
+  input_box = document.createElement("INPUT");
+  input_box.setAttribute("type", "submit");
+  input_box.setAttribute("defaultValue", "ROOM CODE");
+  input_box.style.display = "none";
   tickCount = 0;
   showingScreen = "main menu";
   runner();
@@ -84,7 +88,8 @@ function menuScreen(){
 
 function joinScreen(){
   game.fill(Color.grey);
-  game.text("Enter Room Code", 360, 75, Color.white, 90, "Barlow", "centered");
+  game.text("Enter Room Code", 360, 125, Color.white, 90, "Barlow", "centered");
+  input_box.style.display = "block";
 }
 
 function bindSocketEvents(){
