@@ -1,0 +1,7 @@
+function Character(){
+
+}
+
+function Characters(){
+  
+}

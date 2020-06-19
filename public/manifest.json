@@ -1,0 +1,22 @@
+{
+    "name":"Rummikub",
+    "short_name":"Rummikub",
+    "theme_color":"#d11913",
+    "background_color":"#222222",
+    "display":"fullscreen",
+    "scope":"/public/",
+    "start_url":"/public/index.html",
+    "orientation":"portrait",
+    "icons":[
+        {
+          "src":"/public/images/logo192.png",
+          "type":"image/png",
+          "sizes":"192x192"
+        },
+      {
+          "src":"/public/images/logo512.png",
+          "type":"image/png",
+          "sizes":"512x512"
+      }
+    ]
+}

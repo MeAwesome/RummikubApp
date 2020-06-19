@@ -1,0 +1,17 @@
+{
+  "name":"rummikubapp",
+  "version":"1.0.0",
+  "main":"app.js",
+  "dependencies": {
+    "express":"^4.16.4",
+    "socket.io":"^2.1.1"
+  },
+  "engines":{
+    "node":"4.1.x"
+  },
+  "scripts":{
+    "start":"node app.js"
+  },
+  "author":"Isaac Robbins",
+  "license":"MIT"
+}
