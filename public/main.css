@@ -18,5 +18,6 @@ canvas{
 	margin:0;
 	border: 0;
   overflow: hidden;
-  display: block;
+  display: absolute;
+	z-index:-1;
 }
