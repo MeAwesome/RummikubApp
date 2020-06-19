@@ -29,10 +29,11 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
-  input_box = document.createElement("INPUT");
-  input_box.setAttribute("type", "submit");
+  input_box = document.createElement("input");
+  input_box.setAttribute("type", "text");
   input_box.setAttribute("defaultValue", "ROOM CODE");
   input_box.style.display = "none";
+  document.body.appendChild(input_box);
   tickCount = 0;
   showingScreen = "main menu";
   runner();
