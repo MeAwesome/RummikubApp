@@ -37,6 +37,14 @@ function bindSocketEvents(){
     color = Color.green;
   });
 
+  socket.on("left_room", () => {
+    color = Color.red;
+  });
+
+  socket.on("room_code", (code) => {
+    console.log(code);
+  });
+
   socket.on("disconnect", () => {
 
   });

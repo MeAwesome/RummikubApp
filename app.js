@@ -27,6 +27,7 @@ io.on("connection", function(socket){
 	socket.emit("connected_to_server");
 
 	socket.on("disconnect", () => {
+		connections[socket.id].leaveRoom();
 		delete connections[socket.id];
 	});
 
@@ -34,6 +35,11 @@ io.on("connection", function(socket){
 		var r = new Room();
 		rooms[r.getCode()] = r;
 		connections[socket.id].joinRoom(r.getCode());
+		socket.emit("room_code", r.getCode());
+	});
+
+	socket.on("join_room", (code) => {
+		connections[socket.id].joinRoom(code);
 	});
 
 });
@@ -42,12 +48,16 @@ function Connection(socket){
 	this.socket = socket;
 	this.socketId = socket.id;
 	this.room = undefined;
-	this.isHost = false;
-	this.isPlayer = false;
 
 	this.joinRoom = function(room){
 		if(rooms[room].canJoin()){
 			rooms[room].addPlayer(this.socketId);
+		}
+	}
+
+	this.leaveRoom = function(){
+		if(this.room != undefined){
+			rooms[this.room].removePlayer(this.socketId);
 		}
 	}
 
@@ -71,6 +81,16 @@ function Room(){
 		this.metadata.players.push(id);
 		connections[id].room = this.metadata.code;
 		connections[id].socket.emit("joined_room");
+	}
+
+	this.removePlayer = function(id){
+		for(var p = 0; p < this.metadata.players.length; p++){
+			if(this.metadata.players[p] == id){
+				this.metadata.players.splice(p, 1);
+			}
+		}
+		connections[id].room = undefined;
+		connections[id].socket.emit("left_room");
 	}
 
 	this.canJoin = function(){
