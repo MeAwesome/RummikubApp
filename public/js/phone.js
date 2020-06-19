@@ -2,6 +2,7 @@ function onLoad(){
   me = new Player();
   game = new Paint("game");
   gameDisplay = new Paint("gameDisplay");
+  join_btn = new Controller("rectangle-button", game)
   logos = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
   socket = io();
@@ -14,6 +15,8 @@ function setup(){
   game.setVisibility(false);
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
+  join_btn.setData("join", 640, 200, 300, 200, Color.red);
+  join_btn.setLabel("JOIN", 60, "Barlow", Color.white, "centered");
   tickCount = 0;
   runner();
 }
@@ -28,6 +31,7 @@ function runner(){
 function menuScreen(){
   game.fill(Color.grey);
   game.image(logos.photo("Rummikub-Logo"), 100, 50, 1080, 203);
+  join_btn.draw();
 }
 
 function bindSocketEvents(){
@@ -52,6 +56,17 @@ function bindSocketEvents(){
   });
 }
 
+function touchesToCoords(e){
+  var widthRatio = game.canvas.width / gameDisplay.canvas.width;
+  var heightRatio = game.canvas.height / gameDisplay.canvas.height;
+  for(var t = 0; t < e.touches.length; t++){
+    touches[t] = {
+      x:e.touches[t].clientX * widthRatio,
+      y:e.touches[t].clientY * heightRatio
+    };
+  }
+}
+
 window.onload = function(){
   onLoad();
 }
@@ -61,4 +76,24 @@ window.addEventListener("resize", () => {
 }, {passive:false});
 window.addEventListener("orientationchange", () => {
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
+}, {passive:false});
+window.addEventListener("touchstart", (e) => {
+	e.preventDefault();
+  touchesToCoords(e);
+	checkPaintTouches(e);
+}, {passive:false});
+window.addEventListener("touchmove", (e) => {
+	e.preventDefault();
+  touchesToCoords(e);
+	checkPaintTouches(e);
+}, {passive:false});
+window.addEventListener("touchend", (e) => {
+	e.preventDefault();
+  touchesToCoords(e);
+	checkPaintTouches(e);
+}, {passive:false});
+window.addEventListener("touchcancel", (e) => {
+	e.preventDefault();
+  touchesToCoords(e);
+	checkPaintTouches(e);
 }, {passive:false});
