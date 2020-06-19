@@ -23,6 +23,7 @@ function setup(){
   join_btn.setLabel("JOIN", 80, "Barlow", Color.white, "centered");
   create_btn.setData("create", 150, 700, 400, 200, Color.blue);
   create_btn.setLabel("CREATE", 80, "Barlow", Color.white, "centered");
+  profile_btn.setData("profile", 470, 900, 100, Color.black);
   tickCount = 0;
   runner();
 }
@@ -39,7 +40,8 @@ function menuScreen(){
   game.image(logos.photo("Rummikub-Logo"), 50, 50, 620, 203);
   join_btn.draw();
   create_btn.draw();
-  game.image(icons.photo("Profile"), 300, 900, 100, 100);
+  profile_btn.draw();
+  game.image(icons.photo("Profile"), 470, 900, 100, 100);
 }
 
 function bindSocketEvents(){
