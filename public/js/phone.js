@@ -141,7 +141,9 @@ function lobbyScreen(){
   for(var player = 0; player < currentRoomData.players.length; player++){
     game.text(currentRoomData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
   }
-  start_btn.draw();
+  if(currentRoomData.players.length > 1){
+    start_btn.draw();
+  }
   home_btn.draw();
   if(home_btn.pressed()){
     click_wav.stop();
