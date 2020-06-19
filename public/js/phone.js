@@ -39,7 +39,7 @@ function runner(){
 
 function menuScreen(){
   game.fill(Color.grey);
-  game.image(logos.photo("Rummikub-Logo"), 50, 50, 620, 203);
+  game.image(logos.photo("Rummikub-Logo"), 50, 75, 620, 203);
   join_btn.draw();
   create_btn.draw();
   settings_btn.draw();
