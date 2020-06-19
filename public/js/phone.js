@@ -15,7 +15,7 @@ function setup(){
   game.setVisibility(false);
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
-  join_btn.setData("join", 490, 200, 300, 200, Color.red);
+  join_btn.setData("join", 350, 500, 400, 200, Color.red);
   join_btn.setLabel("JOIN", 60, "Barlow", Color.white, "centered");
   tickCount = 0;
   runner();
@@ -30,7 +30,7 @@ function runner(){
 
 function menuScreen(){
   game.fill(Color.grey);
-  game.image(logos.photo("Rummikub-Logo"), 100, 50, 1080, 203);
+  game.image(logos.photo("Rummikub-Logo"), 50, 50, 620, 203);
   join_btn.draw();
 }
 
