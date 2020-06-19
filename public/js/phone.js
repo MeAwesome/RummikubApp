@@ -84,7 +84,7 @@ function menuScreen(){
 
 function joinScreen(){
   game.fill(Color.grey);
-  game.text("Enter Room Code", 360, 75, Color.white, 100, "Barlow", "centered");
+  game.text("Enter Room Code", 360, 75, Color.white, 90, "Barlow", "centered");
 }
 
 function bindSocketEvents(){
