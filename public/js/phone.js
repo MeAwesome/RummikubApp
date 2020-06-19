@@ -43,7 +43,7 @@ function menuScreen(){
   join_btn.draw();
   create_btn.draw();
   settings_btn.draw();
-  game.image(icons.photo("Profile"), 50, 1050, 200, 200);
+  game.image(icons.photo("Settings"), 50, 1050, 200, 200);
   profile_btn.draw();
   game.image(icons.photo("Profile"), 450, 1050, 200, 200);
 }
