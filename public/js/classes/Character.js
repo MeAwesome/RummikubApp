@@ -1,7 +1,0 @@
-function Character(){
-
-}
-
-function Characters(){
-  
-}
