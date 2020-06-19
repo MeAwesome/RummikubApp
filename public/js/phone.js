@@ -61,18 +61,22 @@ function menuScreen(){
   profile_btn.draw();
   game.image(icons.photo("Profile"), 450, 1050, 200, 200);
   if(join_btn.pressed()){
+    click_wav.stop();
     click_wav.play();
     showingScreen = "join menu";
   }
   if(create_btn.pressed()){
+    click_wav.stop();
     click_wav.play();
     showingScreen = "create menu";
   }
   if(settings_btn.pressed()){
+    click_wav.stop();
     click_wav.play();
     showingScreen = "settings menu";
   }
   if(profile_btn.pressed()){
+    click_wav.stop();
     click_wav.play();
     showingScreen = "profile menu";
   }
@@ -80,6 +84,7 @@ function menuScreen(){
 
 function joinScreen(){
   game.fill(Color.grey);
+  game.text("Enter Room Code", 360, 75, Color.white, 100, "Barlow", "centered");
 }
 
 function bindSocketEvents(){
