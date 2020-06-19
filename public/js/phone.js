@@ -23,7 +23,7 @@ function setup(){
   join_btn.setLabel("JOIN", 80, "Barlow", Color.white, "centered");
   create_btn.setData("create", 150, 700, 400, 200, Color.blue);
   create_btn.setLabel("CREATE", 80, "Barlow", Color.white, "centered");
-  profile_btn.setData("profile", 470, 900, 100, Color.black);
+  profile_btn.setData("profile", 500, 1100, 50, Color.black);
   tickCount = 0;
   runner();
 }
@@ -41,7 +41,7 @@ function menuScreen(){
   join_btn.draw();
   create_btn.draw();
   profile_btn.draw();
-  game.image(icons.photo("Profile"), 470, 900, 100, 100);
+  game.image(icons.photo("Profile"), 500, 1100, 100, 100);
 }
 
 function bindSocketEvents(){
