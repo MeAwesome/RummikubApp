@@ -12,6 +12,7 @@ function onLoad(){
   room2_btn = new Controller("rectangle-button", game);
   room3_btn = new Controller("rectangle-button", game);
   room4_btn = new Controller("rectangle-button", game);
+  start_btn = new Controller("rectangle-button", game);
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
@@ -43,6 +44,8 @@ function setup(){
   room3_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   room4_btn.setData("room4", 420, 700, 200, 100, Color.white);
   room4_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
+  start_btn.setData("start", 420, 700, 100, 50, Color.green);
+  start_btn.setLabel("START", 60, "Barlow", Color.black, "centered");
   tickCount = 0;
   showingScreen = "main menu";
   open_rooms = [];
@@ -138,6 +141,7 @@ function lobbyScreen(){
   for(var player = 0; player < currentRoomData.players.length; player++){
     game.text(currentRoomData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
   }
+  start_btn.draw();
   home_btn.draw();
   if(home_btn.pressed()){
     click_wav.stop();
