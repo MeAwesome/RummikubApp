@@ -136,7 +136,7 @@ function lobbyScreen(){
   game.fill(Color.grey);
   game.text(currentRoom, 360, 125, Color.white, 90, "Barlow", "centered");
   for(var player = 0; player < currentRoomData.players.length; player++){
-    game.text(currentRoomData.players[player], 360, 250 + (250 * player), Color.white, 50, "Barlow", "centered");
+    game.text(currentRoomData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
   }
   home_btn.draw();
   if(home_btn.pressed()){
