@@ -2,6 +2,8 @@ function onLoad(){
   me = new Player();
   game = new Paint("game");
   gameDisplay = new Paint("gameDisplay");
+  logos = new Album();
+  logos.addPhotos("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
   socket = io();
   bindSocketEvents();
 }
@@ -13,7 +15,6 @@ function setup(){
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
   tickCount = 0;
-  color = Color.red;
   runner();
 }
 
@@ -25,7 +26,8 @@ function runner(){
 }
 
 function menuScreen(){
-  game.fill(color);
+  game.fill(Color.grey);
+  game.image(logos.photo("Rummikub-Logo"), 100, 100);
 }
 
 function bindSocketEvents(){
