@@ -46,7 +46,7 @@ function bindSocketEvents(){
   });
 
   socket.on("disconnect", () => {
-
+    color = Color.red;
   });
 }
 

@@ -91,6 +91,9 @@ function Room(){
 		}
 		connections[id].room = undefined;
 		connections[id].socket.emit("left_room");
+		if(this.metadata.players.length == 0){
+			delete rooms[this.metadata.code];
+		}
 	}
 
 	this.canJoin = function(){
