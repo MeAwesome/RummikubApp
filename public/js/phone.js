@@ -27,6 +27,7 @@ function setup(){
   create_btn.setData("create", 150, 700, 400, 200, Color.blue);
   create_btn.setLabel("CREATE", 80, "Barlow", Color.white, "centered");
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
+  profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
   tickCount = 0;
   showingScreen = "main menu";
