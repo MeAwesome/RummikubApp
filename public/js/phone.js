@@ -8,7 +8,7 @@ function onLoad(){
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
-  icons.addImages("/public/images/", ["profile.jpg"]);
+  icons.addImages("/public/images/", ["Profile.png"]);
   socket = io();
   bindSocketEvents();
 }
@@ -39,7 +39,7 @@ function menuScreen(){
   game.image(logos.photo("Rummikub-Logo"), 50, 50, 620, 203);
   join_btn.draw();
   create_btn.draw();
-  game.image(icons.photo("profile"), 300, 900, 100, 100);
+  game.image(icons.photo("Profile"), 300, 900, 100, 100);
 }
 
 function bindSocketEvents(){
