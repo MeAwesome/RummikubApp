@@ -142,7 +142,7 @@ function lobbyScreen(){
   if(home_btn.pressed()){
     click_wav.stop();
     click_wav.play();
-    showingScreen = "main menu";
+    socket.emit("leave_room");
   }
 }
 
@@ -158,7 +158,7 @@ function bindSocketEvents(){
   });
 
   socket.on("left_room", () => {
-    color = Color.red;
+    showingScreen = "main menu";
   });
 
   socket.on("found_rooms", (rooms) => {
