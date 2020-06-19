@@ -109,6 +109,11 @@ function joinScreen(){
   //for(var room = 0; room < open_rooms.length; room++){
     //game.
   //}
+  if(room1_btn.pressed()){
+    click_wav.stop();
+    click_wav.play();
+    showingScreen = "main menu";
+  }
   if(home_btn.pressed()){
     click_wav.stop();
     click_wav.play();
