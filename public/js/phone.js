@@ -11,7 +11,7 @@ function onLoad(){
 
 function setup(){
   game.makeBuffer(gameDisplay);
-  game.setSize(1280, 720);
+  game.setSize(720, 1280);
   game.setVisibility(false);
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
