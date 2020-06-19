@@ -31,7 +31,7 @@ function setup(){
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
   input_box = document.createElement("input");
   input_box.setAttribute("type", "text");
-  input_box.setAttribute("defaultValue", "ROOM CODE");
+  input_box.setAttribute("size", 40);
   input_box.style.display = "none";
   document.body.appendChild(input_box);
   tickCount = 0;
