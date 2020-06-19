@@ -29,11 +29,8 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   profile_btn.setHoldColors(Color.yellow, Color.black);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
-  input_box = document.createElement("input");
-  input_box.setAttribute("type", "text");
-  input_box.setAttribute("size", 40);
+  input_box = document.getElementById("textinput");
   input_box.style.display = "none";
-  document.body.appendChild(input_box);
   tickCount = 0;
   showingScreen = "main menu";
   runner();
