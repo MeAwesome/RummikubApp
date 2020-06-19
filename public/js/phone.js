@@ -2,7 +2,8 @@ function onLoad(){
   me = new Player();
   game = new Paint("game");
   gameDisplay = new Paint("gameDisplay");
-  join_btn = new Controller("rectangle-button", game)
+  join_btn = new Controller("rectangle-button", game);
+  create_btn = new Controller("rectangle-button", game);
   logos = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
   socket = io();
@@ -15,8 +16,10 @@ function setup(){
   game.setVisibility(false);
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
-  join_btn.setData("join", 350, 500, 400, 200, Color.red);
-  join_btn.setLabel("JOIN", 60, "Barlow", Color.white, "centered");
+  join_btn.setData("join", 150, 400, 400, 200, Color.red);
+  join_btn.setLabel("JOIN", 80, "Barlow", Color.white, "centered");
+  create_btn.setData("create", 150, 800, 400, 200, Color.blue);
+  create_btn.setLabel("CREATE", 80, "Barlow", Color.white, "centered");
   tickCount = 0;
   runner();
 }
@@ -32,6 +35,7 @@ function menuScreen(){
   game.fill(Color.grey);
   game.image(logos.photo("Rummikub-Logo"), 50, 50, 620, 203);
   join_btn.draw();
+  create_btn.draw();
 }
 
 function bindSocketEvents(){
