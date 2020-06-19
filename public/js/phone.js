@@ -165,6 +165,10 @@ function bindSocketEvents(){
     open_rooms = rooms;
   });
 
+  socket.on("update_room", (data) => {
+    currentRoomData = data;
+  });
+
   socket.on("disconnect", () => {
     color = Color.red;
   });

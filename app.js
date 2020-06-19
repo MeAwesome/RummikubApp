@@ -96,6 +96,7 @@ function Room(){
 		this.metadata.players.push(id);
 		connections[id].room = this.metadata.code;
 		connections[id].socket.emit("joined_room", this.getRoomMetadata());
+		this.sendToRoomMembers("update_room", this.getRoomMetadata());
 	}
 
 	this.removePlayer = function(id){
@@ -106,8 +107,15 @@ function Room(){
 		}
 		connections[id].room = undefined;
 		connections[id].socket.emit("left_room");
+		this.sendToRoomMembers("update_room", this.getRoomMetadata());
 		if(this.metadata.players.length == 0){
 			delete rooms[this.metadata.code];
+		}
+	}
+
+	this.sendToRoomMembers = function(name, message){
+		for(var p = 0; p < this.metadata.players.length; p++){
+			connections[this.metadata.players[p]].socket.emit(name, message);
 		}
 	}
 
