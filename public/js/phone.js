@@ -15,7 +15,7 @@ function setup(){
   game.setVisibility(false);
   gameDisplay.setSize(window.innerWidth, window.innerHeight);
   gameDisplay.setVisibility(true);
-  join_btn.setData("join", 640, 200, 300, 200, Color.red);
+  join_btn.setData("join", 640, 200, 300, 200, Color.red, "centered");
   join_btn.setLabel("JOIN", 60, "Barlow", Color.white, "centered");
   tickCount = 0;
   runner();
