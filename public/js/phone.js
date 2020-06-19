@@ -36,7 +36,7 @@ function setup(){
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
   home_btn.setData("home", logos.photo("Rummikub-Joker"), 285, 1000, 150, 150);
   room1_btn.setData("room1", 100, 400, 200, 100, Color.white);
-  room1_btn.setLabel("ABCD", 80, "Barlow", Color.black, "centered");
+  room1_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   room2_btn.setData("room2", 420, 400, 200, 100, Color.white);
   room2_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   room3_btn.setData("room3", 100, 700, 200, 100, Color.white);
@@ -46,6 +46,7 @@ function setup(){
   tickCount = 0;
   showingScreen = "main menu";
   open_rooms = [];
+  currentPage = 0;
   runner();
 }
 
@@ -106,9 +107,14 @@ function joinScreen(){
   room3_btn.draw();
   room4_btn.draw();
   home_btn.draw();
-  //for(var room = 0; room < open_rooms.length; room++){
-    //game.
-  //}
+  var room_btns = [room1_btn, room2_btn, room3_btn, room4_btn];
+  for(var room = 0; room < 4; room++){
+    if(room + (4 * currentPage) < open_rooms.length){
+      room_btns[room].setLabelText(open_rooms[room + (4 * currentPage)]);
+    } else {
+      room_btns[room].setLabelText("----");
+    }
+  }
   if(room1_btn.pressed()){
     click_wav.stop();
     click_wav.play();
