@@ -10,6 +10,7 @@ function onLoad(){
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
   icons.addImages("/public/images/", ["Profile.png", "Settings.png"]);
+  click_wav = new Wave("/public/sounds/button-click.mp3");
   socket = io();
   bindSocketEvents();
 }
@@ -27,11 +28,22 @@ function setup(){
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
   settings_btn.setData("settings", 150, 1150, 100, Color.black);
   tickCount = 0;
+  showingScreen = "main menu";
   runner();
 }
 
 function runner(){
-  menuScreen();
+  switch(showingScreen){
+    case "main menu":
+      menuScreen();
+      break;
+    case "join menu":
+      joinScreen();
+      break;
+    default:
+      menuScreen();
+      break;
+  }
   gameDisplay.copyData(game, 0, 0, gameDisplay.canvas.width, gameDisplay.canvas.height);
   tickCount = (tickCount + 1) % 60;
   window.requestAnimationFrame(runner);
@@ -46,6 +58,14 @@ function menuScreen(){
   game.image(icons.photo("Settings"), 55, 1055, 190, 190);
   profile_btn.draw();
   game.image(icons.photo("Profile"), 450, 1050, 200, 200);
+  if(join_btn.pressed()){
+    click_wav.play();
+    showingScreen = "join";
+  }
+}
+
+function joinScreen(){
+  game.fill(Color.grey);
 }
 
 function bindSocketEvents(){
