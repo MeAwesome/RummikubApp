@@ -9,7 +9,7 @@ function onLoad(){
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
-  icons.addImages("/public/images/", ["Profile.png"]);
+  icons.addImages("/public/images/", ["Profile.png", "Settings.png"]);
   socket = io();
   bindSocketEvents();
 }
@@ -25,7 +25,7 @@ function setup(){
   create_btn.setData("create", 150, 700, 400, 200, Color.blue);
   create_btn.setLabel("CREATE", 80, "Barlow", Color.white, "centered");
   profile_btn.setData("profile", 550, 1150, 100, Color.yellow);
-  settings_btn.setData("settings", 50, 1150, 100, Color.black);
+  settings_btn.setData("settings", 150, 1150, 100, Color.black);
   tickCount = 0;
   runner();
 }
@@ -43,6 +43,7 @@ function menuScreen(){
   join_btn.draw();
   create_btn.draw();
   settings_btn.draw();
+  game.image(icons.photo("Profile"), 50, 1050, 200, 200);
   profile_btn.draw();
   game.image(icons.photo("Profile"), 450, 1050, 200, 200);
 }
