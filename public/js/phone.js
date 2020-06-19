@@ -5,7 +5,7 @@ function onLoad(){
   join_btn = new Controller("rectangle-button", game);
   create_btn = new Controller("rectangle-button", game);
   profile_btn = new Controller("circle-button", game);
-  settings_btn = new Controller("settings-button", game);
+  settings_btn = new Controller("circle-button", game);
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
