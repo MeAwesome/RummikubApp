@@ -27,7 +27,7 @@ function runner(){
 
 function menuScreen(){
   game.fill(Color.grey);
-  game.image(logos.photo("Rummikub-Logo"), 100, 100);
+  game.image(logos.photo("Rummikub-Logo"), 100, 50, 1080, 203);
 }
 
 function bindSocketEvents(){
