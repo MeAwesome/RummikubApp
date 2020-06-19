@@ -19,12 +19,10 @@ canvas{
 	border: 0;
   overflow: hidden;
   position: absolute;
-	z-index:0;
 }
 
 input{
 	position:absolute;
-	z-index: 1;
 	top:250px;
 	left:20%;
 	display:none;
