@@ -95,14 +95,15 @@ function Room(){
 	};
 
 	this.data = {
-
+		currentPlayer:0,
+		timeLeft:undefined
 	}
 
 	this.addPlayer = function(id){
 		this.metadata.players.push(id);
 		connections[id].room = this.metadata.code;
 		connections[id].socket.emit("joined_room", this.getRoomMetadata());
-		this.sendToRoomMembers("update_room", this.getRoomMetadata());
+		this.sendToRoomMembers("update_room", this.getRoomMetadata(), this.getRoomData());
 	}
 
 	this.removePlayer = function(id){
@@ -113,7 +114,7 @@ function Room(){
 		}
 		connections[id].room = undefined;
 		connections[id].socket.emit("left_room");
-		this.sendToRoomMembers("update_room", this.getRoomMetadata());
+		this.sendToRoomMembers("update_room", this.getRoomMetadata(), this.getRoomData());
 		if(this.metadata.players.length == 0){
 			delete rooms[this.metadata.code];
 		}
@@ -133,12 +134,29 @@ function Room(){
 		return this.metadata;
 	}
 
+	this.getRoomData = function(){
+		return this.data;
+	}
+
 	this.getCode = function(){
 		return this.metadata.code;
 	}
 
 	this.startGame = function(){
 		this.metadata.open = false;
+		this.sendToRoomMembers("started_game");
+		this.startTurn(this.data.currentPlayer);
+	}
+
+	this.startTurn = function(player){
+		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("current_turn");
+	}
+
+	this.nextTurn = function(){
+		this.data.currentPlayer++;
+		if(this.data.currentPlayer == this.metadata.players.length){
+			this.data.currentPlayer = 0;
+		}
 	}
 }
 

@@ -51,6 +51,7 @@ function setup(){
   open_rooms = [];
   currentPage = 0;
   currentRoom = undefined;
+  currentRoomMetaData = undefined;
   currentRoomData = undefined;
   runner();
 }
@@ -65,6 +66,12 @@ function runner(){
       break;
     case "lobby menu":
       lobbyScreen();
+      break;
+    case "game menu passive":
+      gameScreen(false);
+      break;
+    case "game menu active":
+      gameScreen(true);
       break;
     default:
       menuScreen();
@@ -138,10 +145,10 @@ function joinScreen(){
 function lobbyScreen(){
   game.fill(Color.grey);
   game.text(currentRoom, 360, 125, Color.red, 100, "Barlow", "centered");
-  for(var player = 0; player < currentRoomData.players.length; player++){
-    game.text(currentRoomData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
+  for(var player = 0; player < currentRoomMetaData.players.length; player++){
+    game.text(currentRoomMetaData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
   }
-  if(currentRoomData.players.length > 1){
+  if(currentRoomMetaData.players.length > 1){
     start_btn.draw();
   }
   home_btn.draw();
@@ -157,6 +164,15 @@ function lobbyScreen(){
   }
 }
 
+function gameScreen(playing){
+  game.fill(Color.grey);
+  if(playing){
+    game.text("It's Your Turn", 360, 640, Color.white, 50, "Barlow", "centered");
+  } else {
+    game.text("Currently Player " + (currentRoomData.currentPlayer + 1) + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
+  }
+}
+
 function bindSocketEvents(){
   socket.on("connected_to_server", () => {
     setup();
@@ -164,12 +180,13 @@ function bindSocketEvents(){
 
   socket.on("joined_room", (data) => {
     currentRoom = data.code;
-    currentRoomData = data;
+    currentRoomMetaData = data;
     showingScreen = "lobby menu";
   });
 
   socket.on("left_room", () => {
     currentRoom = undefined;
+    currentRoomMetaData = undefined;
     currentRoomData = undefined;
     showingScreen = "main menu";
   });
@@ -178,8 +195,17 @@ function bindSocketEvents(){
     open_rooms = rooms;
   });
 
-  socket.on("update_room", (data) => {
+  socket.on("update_room", (metadata, data) => {
+    currentRoomMetaData = metadata;
     currentRoomData = data;
+  });
+
+  socket.on("started_game", () => {
+    showingScreen = "game menu passive";
+  });
+
+  socket.on("current_turn", () => {
+    showingScreen = "game menu active";
   });
 
   socket.on("disconnect", () => {
