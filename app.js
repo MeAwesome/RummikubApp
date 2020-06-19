@@ -56,7 +56,7 @@ function Connection(socket){
 	this.room = undefined;
 
 	this.joinRoom = function(room){
-		if(rooms[room].canJoin()){
+		if(rooms[room].canJoin() && this.room == undefined){
 			rooms[room].addPlayer(this.socketId);
 		}
 	}
