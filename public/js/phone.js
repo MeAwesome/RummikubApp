@@ -23,7 +23,7 @@ function setup(){
   join_btn.setLabel("JOIN", 80, "Barlow", Color.white, "centered");
   create_btn.setData("create", 150, 700, 400, 200, Color.blue);
   create_btn.setLabel("CREATE", 80, "Barlow", Color.white, "centered");
-  profile_btn.setData("profile", 500, 1100, 50, Color.black);
+  profile_btn.setData("profile", 550, 1150, 50, Color.black);
   tickCount = 0;
   runner();
 }
