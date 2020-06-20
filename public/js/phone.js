@@ -198,7 +198,7 @@ function lobbyScreen(){
 function gameScreen(playing){
   game.fill(Color.grey);
   if(playing){
-    end_turn_btn.setLabelText("END TURN\n2:00");
+    game.text("2:00", 360, 527, Color.black, 70, "Barlow", "centered");
     end_turn_btn.draw();
     end_game_btn.draw();
     if(end_turn_btn.pressed()){
