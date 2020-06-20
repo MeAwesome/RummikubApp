@@ -1,6 +1,7 @@
 var express = require("express");
 var os = require("os");
 var moment = require("moment");
+var countdown = require("moment-countdown");
 var app = express();
 var serv = require("http").Server(app);
 var io = require("socket.io")(serv,{});
@@ -184,7 +185,7 @@ function Room(){
 		this.privatedata.end = moment().add(2, "minutes");
 		this.privatedata.timer = setInterval(() => {
 			var previous = this.data.timeLeft;
-			this.data.timeLeft = moment().to(this.privatedata.end).format("m:ss");
+			this.data.timeLeft = moment().countdown(this.privatedata.end).format("m:ss");
 			if(previous != this.data.timeLeft){
 				this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 			}
