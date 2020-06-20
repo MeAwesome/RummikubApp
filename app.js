@@ -66,6 +66,10 @@ io.on("connection", function(socket){
 		rooms[connections[socket.id].room].nextTurn();
 	});
 
+	socket.on("end_game", () => {
+		rooms[connections[socket.id].room].endGame();
+	});
+
 });
 
 function Connection(socket){
@@ -164,6 +168,10 @@ function Room(){
 			this.data.currentPlayer = 0;
 		}
 		this.startTurn();
+	}
+
+	this.endGame = function(){
+		this.sendToRoomMembers("ended_game", this.metadata.players[this.data.currentPlayer]);
 	}
 }
 

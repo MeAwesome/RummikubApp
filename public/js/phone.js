@@ -61,6 +61,7 @@ function setup(){
   currentRoom = undefined;
   currentRoomMetaData = undefined;
   currentRoomData = undefined;
+  winner = undefined;
   runner();
 }
 
@@ -80,6 +81,9 @@ function runner(){
       break;
     case "game menu active":
       gameScreen(true);
+      break;
+    case "win menu":
+      winScreen();
       break;
     default:
       menuScreen();
@@ -212,6 +216,18 @@ function gameScreen(playing){
   }
 }
 
+function winScreen(){
+  game.fill(Color.grey);
+  game.text(winner, 360, 640, Color.yellow, 70, "Barlow", "centered");
+  game.text("Is The Winner!", 360, 740, Color.white, 50, "Barlow", "centered");
+  home_btn.draw();
+  if(home_btn.pressed()){
+    click_wav.stop();
+    click_wav.play();
+    socket.emit("leave_room");
+  }
+}
+
 function bindSocketEvents(){
   socket.on("connected_to_server", () => {
     setup();
@@ -220,6 +236,7 @@ function bindSocketEvents(){
   socket.on("joined_room", (data) => {
     currentRoom = data.code;
     currentRoomMetaData = data;
+    winner = undefined;
     showingScreen = "lobby menu";
   });
 
@@ -227,6 +244,7 @@ function bindSocketEvents(){
     currentRoom = undefined;
     currentRoomMetaData = undefined;
     currentRoomData = undefined;
+    winner = undefined;
     showingScreen = "main menu";
   });
 
@@ -249,6 +267,11 @@ function bindSocketEvents(){
 
   socket.on("ended_turn", () => {
     showingScreen = "game menu passive";
+  });
+
+  socket.on("ended_game", (victor) => {
+    winner = victor;
+    showingScreen = "win menu";
   });
 
   socket.on("disconnect", () => {
