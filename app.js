@@ -188,6 +188,9 @@ function Room(){
 			if(previous != this.data.timeLeft){
 				this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 			}
+			if(moment() == this.privatedata.end){
+				this.nextTurn();
+			}
 		}, 100);
 	}
 }
