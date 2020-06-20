@@ -183,7 +183,7 @@ function Room(){
 	this.startTimer = function(){
 		this.privatedata.counter = 0;
 		this.privatedata.timer = setInterval(() => {
-			this.data.timeLeft = (120 - (this.privatedata.counter) % 60) + ":" + ((60 - this.privatedata.counter) % 60);
+			this.data.timeLeft = ((120 - this.privatedata.counter) % 60) + ":" + ((60 - this.privatedata.counter) % 60);
 			this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 			if(this.privatedata.counter == 120){
 				this.nextTurn();
