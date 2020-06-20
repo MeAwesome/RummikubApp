@@ -51,7 +51,7 @@ function setup(){
   end_turn_btn.setData("end-turn", 360, 427, 300, Color.red);
   end_turn_btn.setLabel("END TURN", 90, "Barlow", Color.black);
   end_turn_btn.setHoldColors(Color.black, Color.red);
-  end_game_btn.setData("end-game", 360, 1060, 200, Color.blue);
+  end_game_btn.setData("end-game", 360, 1000, 200, Color.blue);
   end_game_btn.setLabel("END GAME", 60, "Barlow", Color.black);
   end_game_btn.setHoldColors(Color.black, Color.blue);
   tickCount = 0;
