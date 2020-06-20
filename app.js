@@ -184,9 +184,7 @@ function Room(){
 		this.privatedata.end = moment().add(2, "minutes");
 		this.privatedata.timer = setInterval(() => {
 			this.data.timeLeft = moment().subtract(this.privatedata.end.get("second"), "seconds").subtract(this.privatedata.end.get("minute"), "minutes").format("m:ss");
-			if(previous != this.data.timeLeft){
-				this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
-			}
+			this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 			if(moment() == this.privatedata.end){
 				this.nextTurn();
 			}
