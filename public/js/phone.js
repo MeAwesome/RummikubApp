@@ -209,7 +209,7 @@ function gameScreen(playing){
   game.fill(Color.grey);
   if(playing){
     end_turn_btn.draw();
-    game.text("2:00", 360, 527, Color.black, 70, "Barlow", "centered");
+    game.text(currentRoomData.timeLeft, 360, 527, Color.black, 70, "Barlow", "centered");
     end_game_btn.draw();
     if(end_turn_btn.pressed()){
       socket.emit("end_turn");

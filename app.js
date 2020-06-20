@@ -107,6 +107,11 @@ function Room(){
 		timeLeft:undefined
 	}
 
+	this.privatedata = {
+		timer:undefined,
+		end:undefined
+	}
+
 	this.addPlayer = function(id){
 		this.metadata.players.push(id);
 		connections[id].room = this.metadata.code;
@@ -159,6 +164,7 @@ function Room(){
 	this.startTurn = function(){
 		this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("current_turn");
+		this.startTimer();
 	}
 
 	this.nextTurn = function(){
@@ -172,6 +178,17 @@ function Room(){
 
 	this.endGame = function(){
 		this.sendToRoomMembers("ended_game", this.metadata.players[this.data.currentPlayer]);
+	}
+
+	this.startTimer = function(){
+		this.privatedata.end = moment().add(2, "minutes");
+		this.privatedata.timer = setInterval(() => {
+			var previous = this.data.timeLeft;
+			this.data.timeLeft = moment().to(this.privatedata.end).format("m:ss");
+			if(previous != this.data.timeLeft){
+				this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
+			}
+		}, 100);
 	}
 }
 
