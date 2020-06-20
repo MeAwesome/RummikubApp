@@ -109,7 +109,7 @@ function Room(){
 
 	this.privatedata = {
 		timer:undefined,
-		end:undefined
+		counter:undefined
 	}
 
 	this.addPlayer = function(id){
@@ -181,14 +181,15 @@ function Room(){
 	}
 
 	this.startTimer = function(){
-		this.privatedata.end = moment().format("m:ss").add(2, "minutes");
+		this.privatedata.counter = 0;
 		this.privatedata.timer = setInterval(() => {
-			this.data.timeLeft = moment().format("m:ss").subtract(this.privatedata.end.get("second"), "seconds").subtract(this.privatedata.end.get("minute"), "minutes").format("m:ss");
+			this.data.timeLeft = (2 - (120 % this.privatedata.counter)) + ":" + (60 - this.privatedata.counter);
 			this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
-			if(moment() == this.privatedata.end){
+			if(this.privatedata.counter == 120){
 				this.nextTurn();
 			}
-		}, 100);
+			this.privatedata.counter++;
+		}, 1000);
 	}
 }
 
