@@ -181,9 +181,9 @@ function Room(){
 	}
 
 	this.startTimer = function(){
-		this.privatedata.end = moment().add(2, "minutes");
+		this.privatedata.end = moment().format("m:ss").add(2, "minutes");
 		this.privatedata.timer = setInterval(() => {
-			this.data.timeLeft = moment().add(this.privatedata.end.get("second"), "seconds").add(this.privatedata.end.get("minute"), "minutes").format("m:ss");
+			this.data.timeLeft = moment().format("m:ss").subtract(this.privatedata.end.get("second"), "seconds").subtract(this.privatedata.end.get("minute"), "minutes").format("m:ss");
 			this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 			if(moment() == this.privatedata.end){
 				this.nextTurn();
