@@ -49,6 +49,7 @@ function setup(){
   start_btn.setLabel("START", 70, "Barlow", Color.black, "centered");
   end_turn_btn.setData("end-turn", 360, 427, 300, Color.red);
   end_turn_btn.setLabel("END TURN", 90, "Barlow", Color.black);
+  end_turn_btn.setHoldColors(Color.black, Color.red);
   tickCount = 0;
   showingScreen = "main menu";
   open_rooms = [];
@@ -194,6 +195,9 @@ function gameScreen(playing){
   game.fill(Color.grey);
   if(playing){
     end_turn_btn.draw();
+    if(end_turn_btn.pressed()){
+      socket.emit("end_turn");
+    }
   } else {
     game.text("Currently Player " + (currentRoomData.currentPlayer + 1) + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
   }
@@ -232,6 +236,10 @@ function bindSocketEvents(){
 
   socket.on("current_turn", () => {
     showingScreen = "game menu active";
+  });
+
+  socket.on("ended_turn", () => {
+    showingScreen = "game menu passive";
   });
 
   socket.on("disconnect", () => {

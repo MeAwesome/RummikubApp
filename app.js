@@ -62,6 +62,10 @@ io.on("connection", function(socket){
 		rooms[connections[socket.id].room].startGame();
 	});
 
+	socket.on("end_turn", () => {
+		rooms[connections[socket.id].room].startGame();
+	});
+
 });
 
 function Connection(socket){
@@ -145,18 +149,20 @@ function Room(){
 	this.startGame = function(){
 		this.metadata.open = false;
 		this.sendToRoomMembers("started_game");
-		this.startTurn(this.data.currentPlayer);
+		this.startTurn();
 	}
 
-	this.startTurn = function(player){
+	this.startTurn = function(){
 		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("current_turn");
 	}
 
 	this.nextTurn = function(){
+		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("ended_turn");
 		this.data.currentPlayer++;
 		if(this.data.currentPlayer == this.metadata.players.length){
 			this.data.currentPlayer = 0;
 		}
+		this.startTurn();
 	}
 }
 
