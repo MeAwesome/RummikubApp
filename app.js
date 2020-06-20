@@ -63,7 +63,7 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("end_turn", () => {
-		rooms[connections[socket.id].room].startGame();
+		rooms[connections[socket.id].room].nextTurn();
 	});
 
 });
