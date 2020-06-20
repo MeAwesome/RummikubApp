@@ -153,6 +153,7 @@ function Room(){
 	}
 
 	this.startTurn = function(){
+		this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
 		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("current_turn");
 	}
 
