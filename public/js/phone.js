@@ -13,6 +13,7 @@ function onLoad(){
   room3_btn = new Controller("rectangle-button", game);
   room4_btn = new Controller("rectangle-button", game);
   start_btn = new Controller("rectangle-button", game);
+  end_turn_btn = new Controller("circle-button", game);
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
@@ -46,6 +47,8 @@ function setup(){
   room4_btn.setLabel("----", 80, "Barlow", Color.black, "centered");
   start_btn.setData("start", 235, 800, 250, 150, Color.green);
   start_btn.setLabel("START", 70, "Barlow", Color.black, "centered");
+  end_turn_btn.setData("end-turn", 360, 427, 300, Color.red);
+  end_turn_btn.setLabel("END TURN", 90, "Barlow", Color.black);
   tickCount = 0;
   showingScreen = "main menu";
   open_rooms = [];
@@ -190,7 +193,7 @@ function lobbyScreen(){
 function gameScreen(playing){
   game.fill(Color.grey);
   if(playing){
-    game.text("It's Your Turn", 360, 640, Color.white, 50, "Barlow", "centered");
+    end_turn_btn.draw();
   } else {
     game.text("Currently Player " + (currentRoomData.currentPlayer + 1) + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
   }
