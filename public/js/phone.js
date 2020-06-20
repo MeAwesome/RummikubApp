@@ -1,5 +1,6 @@
 function onLoad(){
   touches = [];
+  noSleep = new NoSleep();
   me = new Player();
   game = new Paint("game");
   gameDisplay = new Paint("gameDisplay");
@@ -336,3 +337,7 @@ window.addEventListener("touchcancel", (e) => {
   touchesToCoords(e);
 	checkPaintTouches(e);
 }, {passive:false});
+document.addEventListener('touchstart', function enableNoSleep() {
+  document.removeEventListener('touchstart', enableNoSleep, false);
+  noSleep.enable();
+}, false);
