@@ -15,6 +15,7 @@ function onLoad(){
   start_btn = new Controller("rectangle-button", game);
   end_turn_btn = new Controller("circle-button", game);
   end_game_btn = new Controller("circle-button", game);
+  refresh_btn = new Controller("rectangle-button", game);
   logos = new Album();
   icons = new Album();
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
@@ -54,6 +55,8 @@ function setup(){
   end_game_btn.setData("end-game", 360, 1000, 200, Color.blue);
   end_game_btn.setLabel("END GAME", 60, "Barlow", Color.black);
   end_game_btn.setHoldColors(Color.black, Color.blue);
+  refresh_btn.setData("refresh", 235, 900, 250, 150, Color.yellow);
+  refresh_btn.setLabel("REFRESH", 70, "Barlow", Color.black, "centered");
   tickCount = 0;
   showingScreen = "main menu";
   open_rooms = [];
@@ -84,6 +87,9 @@ function runner(){
       break;
     case "win menu":
       winScreen();
+      break;
+    case "error menu":
+      errorScreen();
       break;
     default:
       menuScreen();
@@ -228,6 +234,15 @@ function winScreen(){
   }
 }
 
+function errorScreen(){
+  game.fill(Color.red);
+  game.text("An Error Occured", 360, 640, Color.white, 50, "Barlow", "centered");
+  refresh_btn.draw();
+  if(refresh_btn.pressed()){
+    window.location.reload();
+  }
+}
+
 function bindSocketEvents(){
   socket.on("connected_to_server", () => {
     setup();
@@ -275,7 +290,8 @@ function bindSocketEvents(){
   });
 
   socket.on("disconnect", () => {
-    color = Color.red;
+    showingScreen = "error menu";
+    socket = undefined;
   });
 }
 
