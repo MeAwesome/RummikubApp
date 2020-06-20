@@ -55,7 +55,7 @@ function setup(){
   end_game_btn.setData("end-game", 360, 1000, 200, Color.blue);
   end_game_btn.setLabel("END GAME", 60, "Barlow", Color.black);
   end_game_btn.setHoldColors(Color.black, Color.blue);
-  refresh_btn.setData("refresh", 235, 900, 250, 150, Color.yellow);
+  refresh_btn.setData("refresh", 235, 900, 300, 150, Color.yellow);
   refresh_btn.setLabel("REFRESH", 70, "Barlow", Color.black, "centered");
   tickCount = 0;
   showingScreen = "main menu";
