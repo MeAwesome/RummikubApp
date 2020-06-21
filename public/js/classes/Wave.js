@@ -13,7 +13,7 @@ function Wave(src){
     clone.play().catch(() =>{
 
     });
-    document.body.removeChile(clone);
+    document.body.removeChild(clone);
   }
 
   this.pause = function(){
