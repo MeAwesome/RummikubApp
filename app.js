@@ -168,6 +168,7 @@ function Room(){
 	}
 
 	this.nextTurn = function(){
+		clearInterval(this.privatedata.timer);
 		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("ended_turn");
 		this.data.currentPlayer++;
 		if(this.data.currentPlayer == this.metadata.players.length){
@@ -177,6 +178,7 @@ function Room(){
 	}
 
 	this.endGame = function(){
+		clearInterval(this.privatedata.timer);
 		this.sendToRoomMembers("ended_game", this.metadata.players[this.data.currentPlayer]);
 	}
 
@@ -194,7 +196,7 @@ function Room(){
 				this.nextTurn();
 			}
 			this.privatedata.counter++;
-		}, 100);
+		}, 500);
 	}
 }
 

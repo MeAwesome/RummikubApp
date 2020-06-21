@@ -80,6 +80,9 @@ function runner(){
     case "lobby menu":
       lobbyScreen();
       break;
+    case "profile menu":
+      profileScreen();
+      break;
     case "game menu passive":
       gameScreen(false);
       break;
@@ -203,6 +206,16 @@ function lobbyScreen(){
     click_wav.stop();
     click_wav.play();
     socket.emit("leave_room");
+  }
+}
+
+function profileScreen(){
+  game.fill(Color.grey);
+  home_btn.draw();
+  if(home_btn.pressed()){
+    click_wav.stop();
+    click_wav.play();
+    showingScreen = "main menu";
   }
 }
 
