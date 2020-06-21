@@ -250,7 +250,6 @@ function winScreen(){
     buttonSound("menu");
     endedTurn = false;
     socket.emit("leave_room");
-    celebration_wav.stop();
   }
 }
 
