@@ -234,7 +234,6 @@ function gameScreen(playing){
       socket.emit("end_game");
     }
   } else {
-    endedTurn = false;
     game.text("Currently Player " + (currentRoomData.currentPlayer + 1) + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
   }
 }
@@ -295,10 +294,12 @@ function bindSocketEvents(){
   });
 
   socket.on("current_turn", () => {
+    endedTurn = false;
     showingScreen = "game menu active";
   });
 
   socket.on("ended_turn", () => {
+    endedTurn = false;
     showingScreen = "game menu passive";
   });
 
