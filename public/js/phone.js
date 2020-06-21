@@ -323,6 +323,9 @@ function touchesToCoords(e){
       y:e.touches[t].clientY * heightRatio
     };
   }
+  if(e.touches.length == 0){
+    touches = [];
+  }
 }
 
 window.onload = function(){
