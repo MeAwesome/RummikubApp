@@ -113,7 +113,10 @@ function Room(){
 	}
 
 	this.addPlayer = function(id){
-		this.metadata.players.push(id);
+		this.metadata.players.push({
+			id:id,
+			name:"Player " + this.metadata.players.length + 1
+		});
 		connections[id].room = this.metadata.code;
 		connections[id].socket.emit("joined_room", this.getRoomMetadata());
 		this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
@@ -121,7 +124,7 @@ function Room(){
 
 	this.removePlayer = function(id){
 		for(var p = 0; p < this.metadata.players.length; p++){
-			if(this.metadata.players[p] == id){
+			if(this.metadata.players[p].id == id){
 				this.metadata.players.splice(p, 1);
 			}
 		}
@@ -135,7 +138,7 @@ function Room(){
 
 	this.sendToRoomMembers = function(name, message){
 		for(var p = 0; p < this.metadata.players.length; p++){
-			connections[this.metadata.players[p]].socket.emit(name, message);
+			connections[this.metadata.players[p].id].socket.emit(name, message);
 		}
 	}
 
@@ -163,13 +166,13 @@ function Room(){
 
 	this.startTurn = function(){
 		this.sendToRoomMembers("update_room", {metadata:this.getRoomMetadata(),data:this.getRoomData()});
-		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("current_turn");
+		connections[this.metadata.players[this.data.currentPlayer].id].socket.emit("current_turn");
 		this.startTimer();
 	}
 
 	this.nextTurn = function(){
 		clearInterval(this.privatedata.timer);
-		connections[this.metadata.players[this.data.currentPlayer]].socket.emit("ended_turn");
+		connections[this.metadata.players[this.data.currentPlayer].id].socket.emit("ended_turn");
 		this.data.currentPlayer++;
 		if(this.data.currentPlayer == this.metadata.players.length){
 			this.data.currentPlayer = 0;
@@ -179,7 +182,7 @@ function Room(){
 
 	this.endGame = function(){
 		clearInterval(this.privatedata.timer);
-		this.sendToRoomMembers("ended_game", this.metadata.players[this.data.currentPlayer]);
+		this.sendToRoomMembers("ended_game", this.metadata.players[this.data.currentPlayer].name);
 	}
 
 	this.startTimer = function(){

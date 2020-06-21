@@ -188,7 +188,7 @@ function lobbyScreen(){
   game.fill(Color.grey);
   game.text(currentRoom, 360, 125, Color.red, 100, "Barlow", "centered");
   for(var player = 0; player < currentRoomMetaData.players.length; player++){
-    game.text(currentRoomMetaData.players[player], 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
+    game.text(currentRoomMetaData.players[player].name, 360, 250 + (100 * player), Color.white, 50, "Barlow", "centered");
   }
   if(currentRoomMetaData.players.length > 1){
     start_btn.draw();
@@ -237,7 +237,7 @@ function gameScreen(playing){
       socket.emit("end_game");
     }
   } else {
-    game.text("Currently Player " + (currentRoomData.currentPlayer + 1) + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
+    game.text("Currently Player " + currentRoomMetaData.players[currentRoomData.currentPlayer] + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
   }
 }
 
