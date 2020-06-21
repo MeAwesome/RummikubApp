@@ -8,9 +8,12 @@ function Wave(src){
   document.getElementById(this.id).load();
 
   this.play = function(){
-    document.getElementById(this.id).play().catch(() =>{
+    var clone = document.getElementById(this.id).cloneNode(true);
+    document.body.appendChild(clone);
+    clone.play().catch(() =>{
 
     });
+    document.body.removeChile(clone);
   }
 
   this.pause = function(){

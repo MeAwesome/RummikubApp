@@ -262,7 +262,7 @@ function errorScreen(){
 function buttonSound(type){
   switch(type){
     case "menu":
-    click_wav.stop();
+    //click_wav.stop();
     click_wav.play();
     break;
   }
