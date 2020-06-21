@@ -22,6 +22,8 @@ function onLoad(){
   logos.addImages("/public/images/", ["Rummikub-Joker.png", "Rummikub-Logo.png"]);
   icons.addImages("/public/images/", ["Profile.png", "Settings.png"]);
   click_wav = new Wave("/public/sounds/button-click.mp3");
+  end_turn_wav = new Wave("/public/sounds/end-turn.mp3");
+  celebration_wav = new Wave("/public/sounds/celebration.mp3");
   socket = io();
   bindSocketEvents();
 }
@@ -229,6 +231,7 @@ function gameScreen(playing){
     if(end_turn_btn.pressed()){
       endedTurn = true;
       socket.emit("end_turn");
+      buttonSound("end turn");
     }
     if(end_game_btn.pressed()){
       socket.emit("end_game");
@@ -247,6 +250,7 @@ function winScreen(){
     buttonSound("menu");
     endedTurn = false;
     socket.emit("leave_room");
+    celebration_wav.stop();
   }
 }
 
@@ -262,9 +266,14 @@ function errorScreen(){
 function buttonSound(type){
   switch(type){
     case "menu":
-    //click_wav.stop();
-    click_wav.play();
-    break;
+      click_wav.play();
+      break;
+    case "end turn":
+      end_turn_wav.play();
+      break;
+    case "end game":
+      celebration_wav.play();
+      break;
   }
 }
 
@@ -314,6 +323,7 @@ function bindSocketEvents(){
   socket.on("ended_game", (victor) => {
     winner = victor;
     showingScreen = "win menu";
+    buttonSound("end game");
   });
 
   socket.on("disconnect", () => {
