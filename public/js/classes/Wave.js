@@ -17,7 +17,7 @@ function Wave(src){
     clone.play().catch(() =>{
 
     });
-    clone.onend = function(){
+    clone.onended = function(){
       document.getElementById(clone.id).remove();
     }
   }
