@@ -118,24 +118,20 @@ function menuScreen(){
   profile_btn.draw();
   game.image(icons.photo("Profile"), 450, 1050, 200, 200);
   if(join_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     socket.emit("find_rooms");
     showingScreen = "join menu";
   }
   if(create_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     socket.emit("create_room");
   }
   if(settings_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     showingScreen = "settings menu";
   }
   if(profile_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     showingScreen = "profile menu";
   }
 }
@@ -157,36 +153,31 @@ function joinScreen(){
     }
   }
   if(room1_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     if(room1_btn.label != "----"){
       socket.emit("join_room", room1_btn.label);
     }
   }
   if(room2_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     if(room2_btn.label != "----"){
       socket.emit("join_room", room2_btn.label);
     }
   }
   if(room3_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     if(room3_btn.label != "----"){
       socket.emit("join_room", room3_btn.label);
     }
   }
   if(room4_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     if(room4_btn.label != "----"){
       socket.emit("join_room", room4_btn.label);
     }
   }
   if(home_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     showingScreen = "main menu";
   }
 }
@@ -202,13 +193,11 @@ function lobbyScreen(){
   }
   home_btn.draw();
   if(start_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     socket.emit("start_game");
   }
   if(home_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     socket.emit("leave_room");
   }
 }
@@ -217,8 +206,7 @@ function settingsScreen(){
   game.fill(Color.grey);
   home_btn.draw();
   if(home_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     showingScreen = "main menu";
   }
 }
@@ -227,8 +215,7 @@ function profileScreen(){
   game.fill(Color.grey);
   home_btn.draw();
   if(home_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     showingScreen = "main menu";
   }
 }
@@ -257,8 +244,7 @@ function winScreen(){
   game.text("Is The Winner!", 360, 740, Color.white, 50, "Barlow", "centered");
   home_btn.draw();
   if(home_btn.pressed()){
-    click_wav.stop();
-    click_wav.play();
+    buttonSound("menu");
     endedTurn = false;
     socket.emit("leave_room");
   }
@@ -270,6 +256,15 @@ function errorScreen(){
   refresh_btn.draw();
   if(refresh_btn.pressed()){
     window.location.reload();
+  }
+}
+
+function buttonSound(type){
+  switch(type){
+    case "menu":
+    click_wav.stop();
+    click_wav.play();
+    break;
   }
 }
 
