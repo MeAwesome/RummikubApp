@@ -115,7 +115,7 @@ function Room(){
 	this.addPlayer = function(id){
 		this.metadata.players.push({
 			id:id,
-			name:"Player " + this.metadata.players.length + 1
+			name:"Player " + (this.metadata.players.length + 1)
 		});
 		connections[id].room = this.metadata.code;
 		connections[id].socket.emit("joined_room", this.getRoomMetadata());
