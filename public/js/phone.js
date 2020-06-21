@@ -310,7 +310,7 @@ function bindSocketEvents(){
 
   socket.on("disconnect", () => {
     showingScreen = "error menu";
-    socket = undefined;
+    socket.disconnect();
   });
 }
 
