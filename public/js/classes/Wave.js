@@ -12,8 +12,9 @@ function Wave(src){
     document.body.appendChild(clone);
     clone.play().catch(() =>{
 
+    }).onend(() => {
+      document.body.removeChild(clone);
     });
-    document.body.removeChild(clone);
   }
 
   this.pause = function(){
