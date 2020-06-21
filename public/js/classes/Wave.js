@@ -8,7 +8,8 @@ function Wave(src){
   document.getElementById(this.id).load();
 
   this.play = function(){
-    var clone = document.getElementById(this.id).cloneNode(true);
+    var original = document.getElementById(this.id);
+    var clone = original.cloneNode(true);
     document.body.appendChild(clone);
     clone.play().catch(() =>{
 
