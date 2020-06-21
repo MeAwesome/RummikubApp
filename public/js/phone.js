@@ -237,7 +237,7 @@ function gameScreen(playing){
       socket.emit("end_game");
     }
   } else {
-    game.text("Currently Player " + currentRoomMetaData.players[currentRoomData.currentPlayer] + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
+    game.text("Currently Player " + currentRoomMetaData.players[currentRoomData.currentPlayer].name + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
   }
 }
 
