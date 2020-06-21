@@ -196,7 +196,7 @@ function Room(){
 				this.nextTurn();
 			}
 			this.privatedata.counter++;
-		}, 500);
+		}, 100);
 	}
 }
 
