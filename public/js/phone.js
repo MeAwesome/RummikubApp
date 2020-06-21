@@ -65,6 +65,7 @@ function setup(){
   currentRoom = undefined;
   currentRoomMetaData = undefined;
   currentRoomData = undefined;
+  endedTurn = false;
   winner = undefined;
   runner();
 }
@@ -221,17 +222,19 @@ function profileScreen(){
 
 function gameScreen(playing){
   game.fill(Color.grey);
-  if(playing){
+  if(playing && endedTurn == false){
     end_turn_btn.draw();
     game.text(currentRoomData.timeLeft, 360, 527, Color.black, 70, "Barlow", "centered");
     end_game_btn.draw();
     if(end_turn_btn.pressed()){
+      endedTurn = true;
       socket.emit("end_turn");
     }
     if(end_game_btn.pressed()){
       socket.emit("end_game");
     }
   } else {
+    endedTurn = false;
     game.text("Currently Player " + (currentRoomData.currentPlayer + 1) + "'s Turn", 360, 640, Color.white, 50, "Barlow", "centered");
   }
 }
@@ -244,6 +247,7 @@ function winScreen(){
   if(home_btn.pressed()){
     click_wav.stop();
     click_wav.play();
+    endedTurn = false;
     socket.emit("leave_room");
   }
 }
